@@ -103,7 +103,7 @@ namespace DSREyeLocator.Core
                         EyePos = where;
                         if (!EyesPositions.ContainsKey(EyePos))
                         {
-                            DuoLog.Error($"No data for this eye position {EyePos} was present");
+                            DuoLog.Error($"无该眼睛数据 {EyePos} 存在");
                         }
                     }
                     else if (cmd == 32)

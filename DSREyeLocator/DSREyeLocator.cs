@@ -19,7 +19,7 @@ namespace DSREyeLocator
 {
     public unsafe class DSREyeLocator : IDalamudPlugin
     {
-        public string Name => "DSR Toolbox";
+        public string Name => "绝龙诗工具箱";
         internal const uint DSRTerritory = 968;
         internal static DSREyeLocator P { get; private set; }
         internal WindowSystem ws;
@@ -51,10 +51,10 @@ namespace DSREyeLocator
                     OpcodeUpdater.DownloadOpcodes($"https://github.com/NightmareXIV/MyDalamudPlugins/raw/main/opcodes/{info.GameVersion}.txt",
                         (dic) =>
                         {
-                            if (dic.TryGetValue("MapEffect", out var code))
+                            if (dic.TryGetValue("地图效果", out var code))
                             {
                                 config.MapEventOpcode = code;
-                                PluginLog.Information($"Downloaded MapEffect opcode 0x{code:X}");
+                                PluginLog.Information($"下载的地图效果OP码 0x{code:X}");
                             }
                         });
                 }
@@ -62,13 +62,13 @@ namespace DSREyeLocator
                 Headmarker.Init();
                 new ChangelogWindow(config, 1, delegate
                 {
-                    ImGuiEx.Text("DSR Eye Locator has been renamed into DSR Toolbox and contains few other functions \n" +
-                        "to help with DSR. " +
-                        "\n\nI may add some other in future as I progress though the fight/do reclears of it." +
-                        "\nBy default only eye locator is enabled, matching previous behavior of the plugin.  ");
+                    ImGuiEx.Text("DSR Eye Locator 已重命名为 DSR Toolbox，并且包含一些 \n" +
+                        "其他绝龙诗功能. " +
+                        "\n\n当我在战斗中取得进展时，我可能会在未来添加其他一些内容。" +
+                        "\n默认情况下，仅启用龙眼定位器，与插件之前的行为相匹配。  ");
                 });
                 Svc.ClientState.TerritoryChanged += TerrChanged;
-                Svc.Commands.AddHandler("/eye", new(delegate { configWindow.IsOpen = true; }) { HelpMessage = "Open configuration" });
+                Svc.Commands.AddHandler("/eye", new(delegate { configWindow.IsOpen = true; }) { HelpMessage = "打开设置界面" });
                 chat = new();
                 MapEffect.Init((a1, a2, a3, a4) =>
                 {
@@ -119,11 +119,11 @@ namespace DSREyeLocator
             {
                 if (value)
                 {
-                    PluginLog.Debug("Combat started");
+                    PluginLog.Debug("战斗开始");
                 }
                 else
                 {
-                    PluginLog.Debug("Combat finished");
+                    PluginLog.Debug("战斗结束");
                     Headmarker.HeadmarkerInfos.Clear();
                     if (P.config.WrothFlames)
                     {

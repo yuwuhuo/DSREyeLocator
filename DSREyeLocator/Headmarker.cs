@@ -30,7 +30,7 @@ namespace DSREyeLocator
             var vfx = ActorVfxCreateHook.Original(a1, a2, a3, a4, a5, a6, a7);
             if (Svc.ClientState.TerritoryType == DSRTerritory || P.config.Test)
             {
-                if (vfxPath.Contains("lockon"))
+                if (vfxPath.Contains("上锁"))
                 {
                     foreach (var p in Svc.Party)
                     {

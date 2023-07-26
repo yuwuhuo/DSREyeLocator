@@ -10,7 +10,7 @@ namespace DSREyeLocator.Gui
     {
         internal static void Draw()
         {
-            ImGuiEx.TextWrapped("If you have found this project useful and wish to contribute, you may send some coins to any of these crypto wallets:");
+            ImGuiEx.TextWrapped("如果您发现该项目有用并希望做出贡献，您可以将一些硬币发送到以下任何一个加密钱包：");
             Donation.PrintDonationInfo();
         }
     }

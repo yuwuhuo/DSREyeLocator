@@ -15,26 +15,26 @@ namespace DSREyeLocator
         {
             try
             {
-                if (Splatoon != null && (bool)Splatoon.GetType().GetField("Init").GetValue(Splatoon))
+                if (Splatoon != null && (bool)Splatoon.GetType().GetField("初始化").GetValue(Splatoon))
                 {
                     return Splatoon;
                 }
                 DalamudReflector.TryGetDalamudPlugin("Splatoon", out var plugin);
-                if ((bool)plugin.GetType().GetField("Init").GetValue(plugin))
+                if ((bool)plugin.GetType().GetField("初始化").GetValue(plugin))
                 {
                     Splatoon = plugin;
                     return Splatoon;
                 }
                 else
                 {
-                    throw new Exception("Splatoon is not initialized");
+                    throw new Exception("Splatoon未初始化");
                 }
             }
             catch (Exception e)
             {
-                PluginLog.Error("Can't find Splatoon plugin: " + e.Message);
+                PluginLog.Error("找不到 Splatoon 插件: " + e.Message);
                 PluginLog.Error(e.StackTrace);
-                Svc.Chat.PrintError("Splatoon was not found and tether feature was disabled");
+                Svc.Chat.PrintError("未找到 Splatoon，且连线功能已禁用");
                 P.config.EnableTether = false;
                 return null;
             }

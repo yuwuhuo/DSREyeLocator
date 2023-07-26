@@ -15,7 +15,7 @@ namespace DSREyeLocator
         TextureWrap imgYes, imgNo1, imgNo2;
         internal bool Correct = false;
         
-        public OverlayWindow() : base("DSREye Overlay",
+        public OverlayWindow() : base("龙眼叠加",
             ImGuiWindowFlags.NoDecoration | ImGuiWindowFlags.AlwaysUseWindowPadding | ImGuiWindowFlags.NoBackground | ImGuiWindowFlags.AlwaysAutoResize |
             ImGuiWindowFlags.NoInputs | ImGuiWindowFlags.NoFocusOnAppearing,
             true)

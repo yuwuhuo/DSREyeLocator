@@ -10,14 +10,14 @@ namespace DSREyeLocator.Gui
     {
         internal static void Draw()
         {
-            ImGui.Checkbox("Enable module", ref P.config.ChainEnabled);
+            ImGui.Checkbox("启用模块", ref P.config.ChainEnabled);
             if (!P.config.ChainEnabled) return;
 
             ImGui.SetNextItemWidth(50f);
-            ImGui.InputFloat("Tether thickness", ref P.config.ChainThickness);
+            ImGui.InputFloat("连线粗细", ref P.config.ChainThickness);
             P.config.Thickness.ValidateRange(0.1f, 50f);
             var col = P.config.ChainColor.ToVector4();
-            ImGui.ColorEdit4("Tether color", ref col);
+            ImGui.ColorEdit4("连线颜色", ref col);
             P.config.ChainColor = col.ToUint();
         }
     }

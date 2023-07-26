@@ -17,7 +17,7 @@ namespace DSREyeLocator.Gui
         internal static FFXIVIpcMapEffect sts = new();
         internal static void Draw()
         {
-            ImGui.Checkbox("Enable MapEffect logging and manipulating", ref P.config.MapEffectDbg);
+            ImGui.Checkbox("启用地图效果记录和操作", ref P.config.MapEffectDbg);
             if (P.config.MapEffectDbg)
             {
                 ImGui.SetNextItemWidth(300f);

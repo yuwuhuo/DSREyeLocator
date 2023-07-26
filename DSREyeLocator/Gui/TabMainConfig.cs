@@ -17,31 +17,31 @@ namespace DSREyeLocator.Gui
             ImGuiEx.Text("0x");
             ImGui.SameLine();
             ImGui.SetNextItemWidth(50f);
-            ImGuiEx.InputHex("MapEvent opcode", ref P.config.MapEventOpcode);
+            ImGuiEx.InputHex("OP码", ref P.config.MapEventOpcode);
 
             ImGui.Separator();
 
-            ImGui.Checkbox("Test mode", ref P.config.Test); 
+            ImGui.Checkbox("测试", ref P.config.Test); 
             ImGui.Separator();
             if (Svc.ClientState.TerritoryType == 838)
             {
                 if (OpcodeFound)
                 {
-                    ImGuiEx.Text(Environment.TickCount % 400 > 200 ? ImGuiColors.ParsedGreen : Vector4.Zero, "Opcode found and recorded!");
+                    ImGuiEx.Text(Environment.TickCount % 400 > 200 ? ImGuiColors.ParsedGreen : Vector4.Zero, "找到OP码并记录d!");
                 }
                 else
                 {
-                    ImGuiEx.Text(ImGuiColors.DalamudOrange, "Go forward until meteor hits the groung");
+                    ImGuiEx.Text(ImGuiColors.DalamudOrange, "向前走，直到流星坠落地面");
                 }
             }
             else
             {
-                ImGuiEx.Text(ImGuiColors.DalamudYellow, "Enter Amaurot to enable opcode finder");
+                ImGuiEx.Text(ImGuiColors.DalamudYellow, "进入亚马乌罗提获取OP码");
             }
             ImGui.Separator();
-            ImGuiEx.Text("Debug:");
-            ImGuiEx.Text($"Sanctity: {SanctityStartTime}/{IsSanctity()}");
-            ImGuiEx.Text($"Death: {DeathStartTime}/{IsDeath()}");
+            ImGuiEx.Text("调试:");
+            ImGuiEx.Text($"二运: {SanctityStartTime}/{IsSanctity()}");
+            ImGuiEx.Text($"死刻: {DeathStartTime}/{IsDeath()}");
             if (Svc.Targets.Target != null)
             {
                 var angle = ConeHandler.GetAngleTo(Svc.Targets.Target.Position.ToVector2());

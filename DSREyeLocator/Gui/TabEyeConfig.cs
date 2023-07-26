@@ -12,23 +12,23 @@ namespace DSREyeLocator.Gui
     {
         internal static void Draw()
         {
-            ImGui.Checkbox("Enable module", ref P.config.EyeEnabled);
+            ImGui.Checkbox("启用模块", ref P.config.EyeEnabled);
             if (!P.config.EyeEnabled) return;
-            if (ImGui.Checkbox("Enable tether to eye and Thordan (requires Splatoon)", ref P.config.EnableTether))
+            if (ImGui.Checkbox("启用眼睛和托尔丹的连线（需要 Splatoon)", ref P.config.EnableTether))
             {
                 if (P.config.EnableTether && !DalamudReflector.TryGetDalamudPlugin("Splatoon", out _))
                 {
-                    Notify.Error("You do not have Splatoon installed");
+                    Notify.Error("您未安装Splatoon");
                     P.config.EnableTether = false;
                 }
             }
             if (P.config.EnableTether)
             {
                 ImGui.SetNextItemWidth(50f);
-                ImGui.InputFloat("Tether thickness", ref P.config.Thickness);
+                ImGui.InputFloat("连线粗细", ref P.config.Thickness);
                 P.config.Thickness.ValidateRange(0.1f, 50f);
                 var col = P.config.Color.ToVector4();
-                ImGui.ColorEdit4("Tether color", ref col);
+                ImGui.ColorEdit4("连线颜色", ref col);
                 P.config.Color = col.ToUint();
                 Safe(delegate
                 {
@@ -36,38 +36,38 @@ namespace DSREyeLocator.Gui
                         Svc.Targets.Target.Position, P.config.Color, P.config.Thickness);
                 });
             }
-            ImGui.Checkbox("Enable banner", ref P.config.EnableBanner);
+            ImGui.Checkbox("启用标题", ref P.config.EnableBanner);
             if (P.config.EnableBanner)
             {
                 ImGui.SetNextItemWidth(50f);
-                ImGui.DragInt("Vertical offset", ref P.config.VerticalOffset);
+                ImGui.DragInt("垂直偏移", ref P.config.VerticalOffset);
                 ImGui.SetNextItemWidth(50f);
-                ImGui.DragInt("Horizontal offset", ref P.config.HorizontalOffset);
+                ImGui.DragInt("水平偏移", ref P.config.HorizontalOffset);
                 ImGui.SetNextItemWidth(50f);
-                ImGui.DragFloat("Scale", ref P.config.Scale, 0.002f, 0.1f, 10f);
+                ImGui.DragFloat("范围", ref P.config.Scale, 0.002f, 0.1f, 10f);
                 P.config.Scale.ValidateRange(0.1f, 10f);
             }
-            ImGui.Checkbox("Blinking", ref P.config.BannerBlink);
+            ImGui.Checkbox("闪烁", ref P.config.BannerBlink);
             ImGuiEx.WithTextColor(ImGuiColors.DalamudOrange, delegate
             {
-                ImGui.Checkbox("Delay displaying information (recommended)", ref P.config.Delay);
+                ImGui.Checkbox("延迟显示信息（推荐）", ref P.config.Delay);
             });
-            ImGuiComponents.HelpMarker("Delay displaying tethers and banner until it actually matters (when going out in sanctity/returning to the middle in death)");
+            ImGuiComponents.HelpMarker("延迟显示连线和标题(二运出去时/死刻回来时)");
             if (P.config.Delay)
             {
-                ImGuiEx.TextWrapped("You can configure delays dependin on how much time you need for each mechanic:");
-                if (ImGui.SmallButton("Reset delays to defaults"))
+                ImGuiEx.TextWrapped("您可以根据每个机制您需要多少时间来设定延迟:");
+                if (ImGui.SmallButton("重置"))
                 {
                     var c = new Config();
                     P.config.SanctityDelay = c.SanctityDelay;
                     P.config.DeathDelay = c.DeathDelay;
                 }
                 ImGui.SetNextItemWidth(50f);
-                ImGui.DragInt("Delay since start of Sanctity of the Ward cast, ms", ref P.config.SanctityDelay, 10, 0, 15000);
-                ImGuiEx.Text("   - Sanctity of the Ward's Gaze resolves at 17731 ms");
+                ImGui.DragInt("二运读条延迟, ms", ref P.config.SanctityDelay, 10, 0, 15000);
+                ImGuiEx.Text("   - 二运读条时间是17731 ms");
                 ImGui.SetNextItemWidth(50f);
-                ImGui.DragInt("Delay since start of Death of the Heavens cast, ms", ref P.config.DeathDelay, 10, 0, 30000);
-                ImGuiEx.Text("   - Death of the Heavens's Gaze resolves at 34255 ms");
+                ImGui.DragInt("至天之阵：死刻延迟, ms", ref P.config.DeathDelay, 10, 0, 30000);
+                ImGuiEx.Text("   - 至天之阵：死刻读条时间是 34255 ms");
             }
         }
     }
